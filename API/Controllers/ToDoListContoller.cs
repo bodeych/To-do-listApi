@@ -7,22 +7,21 @@ namespace API.Controllers;
 [Route("api/[controller]")]
 public class ToDoListController : ControllerBase
 {
-    private static List<ToDoListPoint> ToDoList = new List<ToDoListPoint>
+    private static List<ToDoList> ToDoLists = new List<ToDoList>
     {
-        new ToDoListPoint { Id = 1, Task = "Shopping" },
-        new ToDoListPoint { Id = 2, Task = "Gym" },
+        new ToDoList { Id = ToDoLists.Count + 1, Points = new List<ToDoListPoint>()}
     };
 
     [HttpGet]
-    public async Task<ActionResult<List<ToDoListPoint>>> GetAllPoints()
+    public async Task<ActionResult<List<ToDoList>>> GetAllToDoLists()
     {
-        return Ok(ToDoList);
+        return Ok(ToDoLists);
     }
     
     [HttpGet("{id}")]
-    public async Task<ActionResult<List<ToDoListPoint>>> GetSinglePoint(int id)
+    public async Task<ActionResult<List<ToDoList>>> GetSingleToDoList(int id)
     {
-        var point = ToDoList.Find((x => x.Id == id));
+        var point = ToDoLists.Find((x => x.Id == id));
         if (point is null)
         {
             return NotFound("Id doesn't exist.");
@@ -31,22 +30,22 @@ public class ToDoListController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<List<ToDoListPoint>>> AddPoint(ToDoListPoint task)
+    public async Task<ActionResult<List<ToDoList>>> AddToDoList(ToDoList point)
     {
-        ToDoList.Add(task);
-        return Ok(ToDoList);
+        ToDoLists.Add(point);
+        return Ok(ToDoLists);
     }
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<List<ToDoListPoint>>> DeletePoint(int id)
+    public async Task<ActionResult<List<ToDoListPoint>>> DeleteToDoList(int id)
     {
-        var point = ToDoList.Find((x => x.Id == id));
-        if (point is null)
+        var toDoList = ToDoLists.Find((x => x.Id == id));
+        if (toDoList is null)
         {
             return NotFound("Id doesn't exist.");
         }
 
-        ToDoList.Remove(point);
-        return Ok(ToDoList);
+        ToDoLists.Remove(toDoList);
+        return Ok(ToDoLists);
     }  
 }
