@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
@@ -34,6 +35,18 @@ public class ToDoListController : ControllerBase
     {
         ToDoLists.Add(point);
         return Ok(ToDoLists);
+    }
+    
+    [HttpPost("{id}")]
+    public async Task<ActionResult<List<ToDoList>>> AddToDoListItem(int id, ToDoListPoint point)
+    {
+        var toDoList = ToDoLists.Find((x => x.Id == id));
+        if (toDoList is null)
+        {
+            return NotFound("Id doesn't exist.");
+        }
+        toDoList.Points.Add(point);
+        return Ok(toDoList.Points);
     }
     
     [HttpDelete("{id}")]
