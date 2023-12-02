@@ -2,7 +2,7 @@ namespace API;
 
 public class ToDoList
 {
-    public int Id { get; set; }
+    public int Id { get; set; } 
     public List<ToDoListPoint> Points { get; set; }
 }
 

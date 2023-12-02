@@ -8,10 +8,7 @@ namespace API.Controllers;
 [Route("api/[controller]")]
 public class ToDoListController : ControllerBase
 {
-    private static List<ToDoList> ToDoLists = new List<ToDoList>
-    {
-        new ToDoList { Id = ToDoLists.Count + 1, Points = new List<ToDoListPoint>()}
-    };
+    private static List<ToDoList> ToDoLists = new List<ToDoList>();
 
     [HttpGet]
     public async Task<ActionResult<List<ToDoList>>> GetAllToDoLists()
