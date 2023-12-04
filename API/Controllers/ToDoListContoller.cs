@@ -1,4 +1,6 @@
 using System.Data.Common;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
@@ -9,6 +11,15 @@ namespace API.Controllers;
 public class ToDoListController : ControllerBase
 {
     private static List<ToDoList> ToDoLists = new List<ToDoList>();
+    [DataContract]
+    public class ToDoListPointDto
+    {
+        [DataMember(Name = "task")]
+        [JsonPropertyName("task")]
+        public string Task { get; set; }
+    }
+
+    
 
     [HttpGet]
     public async Task<ActionResult<List<ToDoList>>> GetAllToDoLists()
@@ -17,7 +28,7 @@ public class ToDoListController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    public async Task<ActionResult<List<ToDoList>>> GetSingleToDoList(int id)
+    public async Task<ActionResult<List<ToDoList>>> GetSingleToDoList([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
     {
         var point = ToDoLists.Find((x => x.Id == id));
         if (point is null)
@@ -28,26 +39,30 @@ public class ToDoListController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<List<ToDoList>>> AddToDoList(ToDoList point)
+    public async Task<ActionResult<List<ToDoList>>> AddToDoList()
     {
-        ToDoLists.Add(point);
+
+        ToDoLists.Add(ToDoList.Create());
+        
         return Ok(ToDoLists);
     }
     
     [HttpPost("{id}")]
-    public async Task<ActionResult<List<ToDoList>>> AddToDoListItem(int id, ToDoListPoint point)
+    public async Task<ActionResult<List<ToDoList>>> AddToDoListItem([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
     {
         var toDoList = ToDoLists.Find((x => x.Id == id));
         if (toDoList is null)
         {
             return NotFound("Id doesn't exist.");
         }
-        toDoList.Points.Add(point);
+
+        toDoList.AddPoint(body.Task);
+    
         return Ok(toDoList.Points);
     }
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<List<ToDoListPoint>>> DeleteToDoList(int id)
+    public async Task<ActionResult<List<ToDoList.ToDoListPoint>>> DeleteToDoList([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
     {
         var toDoList = ToDoLists.Find((x => x.Id == id));
         if (toDoList is null)
@@ -57,5 +72,7 @@ public class ToDoListController : ControllerBase
 
         ToDoLists.Remove(toDoList);
         return Ok(ToDoLists);
-    }  
+    } 
+    
 }
+
