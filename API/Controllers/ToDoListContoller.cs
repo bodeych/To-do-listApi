@@ -3,6 +3,8 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Application;
+
 
 namespace API.Controllers;
 
@@ -18,13 +20,20 @@ public class ToDoListController : ControllerBase
         [JsonPropertyName("task")]
         public string Task { get; set; }
     }
+    [DataContract]
+    public class ToDoListResponseDto
+    {
+        
+    }
 
+    
+   
     
 
     [HttpGet]
     public async Task<ActionResult<List<ToDoList>>> GetAllToDoLists()
     {
-        return Ok(ToDoLists);
+        return AddToDoList()
     }
     
     [HttpGet("{id}")]
