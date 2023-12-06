@@ -10,7 +10,7 @@ namespace API.Controllers;
 [Route("api/[controller]")]
 public class ToDoListController : ControllerBase
 {
-    private static List<ToDoList> ToDoLists = new List<ToDoList>();
+    
     [DataContract]
     public class ToDoListPointDto
     {
