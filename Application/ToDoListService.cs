@@ -6,22 +6,32 @@ namespace Application;
 public class ToDoListService
 {
     private static List<ToDoList> ToDoLists = new List<ToDoList>();
-
-    [DataContract]
+    
     public class ToDoListServiceDto
+    {
+        public List<ToDoList.ToDoListPoint> Points { get; set; }
+    }
+    public class ToDoListPointServiceDto
     {
         public string Task { get; set; }
     }
+
+    public List<ToDoList> Get()
+    {
+        return ToDoLists;
+    }
+    
+   
     public ToDoList? FindBy(Guid id)
     {
         var point = ToDoLists.Find((x => x.Id == id));
         return point;
     }
-    public void AddToDoList() { 
+    public void CreateToDoList() { 
         ToDoLists.Add(ToDoList.Create());
     }
 
-    public List<ToDoList>? AddItem(Guid id, ToDoListServiceDto body)
+    public List<ToDoList>? AddItem(Guid id, ToDoListPointServiceDto body)
     {
         var toDoList = ToDoLists.Find((x => x.Id == id));
         if (toDoList is null)

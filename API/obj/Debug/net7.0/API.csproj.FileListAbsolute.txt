@@ -31,3 +31,7 @@
 /Users/bodeych/RiderProjects/API/API/obj/Debug/net7.0/API.pdb
 /Users/bodeych/RiderProjects/API/API/obj/Debug/net7.0/API.genruntimeconfig.cache
 /Users/bodeych/RiderProjects/API/API/obj/Debug/net7.0/ref/API.dll
+/Users/bodeych/RiderProjects/API/API/bin/Debug/net7.0/Application.dll
+/Users/bodeych/RiderProjects/API/API/bin/Debug/net7.0/Domain.dll
+/Users/bodeych/RiderProjects/API/API/bin/Debug/net7.0/Application.pdb
+/Users/bodeych/RiderProjects/API/API/bin/Debug/net7.0/Domain.pdb

@@ -12,76 +12,75 @@ namespace API.Controllers;
 [Route("api/[controller]")]
 public class ToDoListController : ControllerBase
 {
+    private readonly ToDoListService _service;
+    public ToDoListController(ToDoListService service)
+    {
+        _service = service;
+    }
     
+    [DataContract]
+    public class ToDoListDto
+    {
+        public Guid Id { get; set; }
+    }
     [DataContract]
     public class ToDoListPointDto
     {
         [DataMember(Name = "task")]
         [JsonPropertyName("task")]
         public string Task { get; set; }
+        public Guid Id { get; set; }
     }
     [DataContract]
     public class ToDoListResponseDto
     {
-        
+        [DataMember(Name = "task")]
+        [JsonPropertyName("task")]
+        public string Task { get; set; }
+        public Guid Id { get; set; }
     }
 
-    
-   
-    
 
     [HttpGet]
-    public async Task<ActionResult<List<ToDoList>>> GetAllToDoLists()
+    public async Task<ActionResult<List<ToDoListResponseDto>>> GetAllToDoLists()
     {
-        return AddToDoList()
+        return Ok(_service.Get());
     }
     
     [HttpGet("{id}")]
-    public async Task<ActionResult<List<ToDoList>>> GetSingleToDoList([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
+    public async Task<ActionResult<List<ToDoListResponseDto>>> GetSingleToDoList([FromRoute]Guid id)
     {
-        var point = ToDoLists.Find((x => x.Id == id));
-        if (point is null)
-        {
-            return NotFound("Id doesn't exist.");
-        }
+        var point = _service.FindBy(id);
         return Ok(point);
     }
-
+    
     [HttpPost]
-    public async Task<ActionResult<List<ToDoList>>> AddToDoList()
+    public async Task<ActionResult<List<ToDoListResponseDto>>> AddToDoList()
     {
-
-        ToDoLists.Add(ToDoList.Create());
-        
-        return Ok(ToDoLists);
+        _service.CreateToDoList();
+        return Ok(_service);
     }
     
     [HttpPost("{id}")]
-    public async Task<ActionResult<List<ToDoList>>> AddToDoListItem([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
+    public async Task<ActionResult<List<ToDoListResponseDto>>> AddToDoListItem([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
     {
-        var toDoList = ToDoLists.Find((x => x.Id == id));
-        if (toDoList is null)
+        var serviceDto = new ToDoListService.ToDoListPointServiceDto
         {
-            return NotFound("Id doesn't exist.");
-        }
-
-        toDoList.AddPoint(body.Task);
-    
-        return Ok(toDoList.Points);
+            Task = body.Task
+        };
+        _service.AddItem(id, serviceDto);
+        var responseDto = new ToDoListResponseDto()
+        {
+            Task = serviceDto.Task
+        };
+        return Ok(_service);  //??
     }
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<List<ToDoList.ToDoListPoint>>> DeleteToDoList([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
+    public async Task<ActionResult<List<ToDoListResponseDto>>> DeleteList([FromRoute]Guid id)
     {
-        var toDoList = ToDoLists.Find((x => x.Id == id));
-        if (toDoList is null)
-        {
-            return NotFound("Id doesn't exist.");
-        }
-
-        ToDoLists.Remove(toDoList);
-        return Ok(ToDoLists);
+        _service.DeleteToDoList(id);
+        return Ok(_service);
     } 
-    
 }
 
