@@ -1,0 +1,15 @@
+/Users/bodeych/RiderProjects/API/Application/bin/Debug/net7.0/Application.deps.json
+/Users/bodeych/RiderProjects/API/Application/bin/Debug/net7.0/Application.dll
+/Users/bodeych/RiderProjects/API/Application/bin/Debug/net7.0/Application.pdb
+/Users/bodeych/RiderProjects/API/Application/bin/Debug/net7.0/Domain.dll
+/Users/bodeych/RiderProjects/API/Application/bin/Debug/net7.0/Domain.pdb
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.csproj.AssemblyReference.cache
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.AssemblyInfoInputs.cache
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.AssemblyInfo.cs
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.csproj.CoreCompileInputs.cache
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.csproj.CopyComplete
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.dll
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/refint/Application.dll
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/Application.pdb
+/Users/bodeych/RiderProjects/API/Application/obj/Debug/net7.0/ref/Application.dll

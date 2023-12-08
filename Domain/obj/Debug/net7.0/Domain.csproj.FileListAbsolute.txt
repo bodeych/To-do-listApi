@@ -1,0 +1,12 @@
+/Users/bodeych/RiderProjects/API/Domain/bin/Debug/net7.0/Domain.deps.json
+/Users/bodeych/RiderProjects/API/Domain/bin/Debug/net7.0/Domain.dll
+/Users/bodeych/RiderProjects/API/Domain/bin/Debug/net7.0/Domain.pdb
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.csproj.AssemblyReference.cache
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.AssemblyInfoInputs.cache
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.AssemblyInfo.cs
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.csproj.CoreCompileInputs.cache
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.dll
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/refint/Domain.dll
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/Domain.pdb
+/Users/bodeych/RiderProjects/API/Domain/obj/Debug/net7.0/ref/Domain.dll

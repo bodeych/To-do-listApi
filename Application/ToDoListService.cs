@@ -7,10 +7,7 @@ public class ToDoListService
 {
     private static List<ToDoList> ToDoLists = new List<ToDoList>();
     
-    public class ToDoListServiceDto
-    {
-        public List<ToDoList.ToDoListPoint> Points { get; set; }
-    }
+   
     public class ToDoListPointServiceDto
     {
         public string Task { get; set; }

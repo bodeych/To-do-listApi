@@ -19,11 +19,7 @@ public class ToDoListController : ControllerBase
         _service = service;
     }
     
-    [DataContract]
-    public class ToDoListDto
-    {
-        public Guid Id { get; set; }
-    }
+    
     [DataContract]
     public class ToDoListPointDto
     {
@@ -34,6 +30,16 @@ public class ToDoListController : ControllerBase
     }
     [DataContract]
     public class ToDoListResponseDto
+    {
+        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
+        [DataMember(Name = "points")] 
+        [JsonPropertyName("points")]
+        public IReadOnlyCollection<ToDoListPointResponseDto> Points { get; set; }
+    }
+    public class ToDoListPointResponseDto
     {
         [DataMember(Name = "id")]
         [JsonPropertyName("id")]
@@ -77,10 +83,15 @@ public class ToDoListController : ControllerBase
         {
             return NotFound(); 
         }
+        var pointsDtos = toDoList.Points.Select(x => new ToDoListPointResponseDto
+        {
+            Id = x.Id,
+            Task = x.Task
+        }).ToArray();
         var response = new ToDoListResponseDto
         {
             Id = toDoList.Id,
-            Task = toDoList
+            Points = pointsDtos
         };
         return Ok(response);
     }
