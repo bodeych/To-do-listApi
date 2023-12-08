@@ -32,7 +32,7 @@ public class ToDoListService
         return ToDoLists;
     }
 
-    public List<ToDoList>? AddItem(Guid id, ToDoListPointServiceDto body)
+    public ToDoList? AddItem(Guid id, ToDoListPointServiceDto body)
     {
         var toDoList = ToDoLists.Find((x => x.Id == id));
         if (toDoList is null)
@@ -41,7 +41,7 @@ public class ToDoListService
         }
 
         toDoList.AddPoint(body.Task);
-        return ToDoLists;
+        return toDoList;
     }
 
     public bool DeleteToDoList(Guid id)

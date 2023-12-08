@@ -35,10 +35,13 @@ public class ToDoListController : ControllerBase
     [DataContract]
     public class ToDoListResponseDto
     {
-        [DataMember(Name = "task")]
+        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
+        [DataMember(Name = "task")] 
         [JsonPropertyName("task")]
         public string Task { get; set; }
-        public Guid Id { get; set; }
     }
 
 
@@ -65,21 +68,28 @@ public class ToDoListController : ControllerBase
     [HttpPost("{id}")]
     public async Task<ActionResult<List<ToDoListResponseDto>>> AddToDoListItem([FromRoute]Guid id, [FromBody]ToDoListPointDto body)
     {
-        var serviceDto = new ToDoListService.ToDoListPointServiceDto
+        var servicePointDto = new ToDoListService.ToDoListPointServiceDto
         {
             Task = body.Task
         };
-        var list = _service.AddItem(id, serviceDto);
-        
-        
-        return Ok(list);  //??
+        var toDoList = _service.AddItem(id, servicePointDto);
+        if (toDoList == null)
+        {
+            return NotFound(); 
+        }
+        var response = new ToDoListResponseDto
+        {
+            Id = toDoList.Id,
+            Task = toDoList
+        };
+        return Ok(response);
     }
     
     [HttpDelete("{id}")]
     public async Task<ActionResult<List<ToDoListResponseDto>>> DeleteList([FromRoute]Guid id)
     {
         _service.DeleteToDoList(id);
-        return Ok(_service);
+        return NoContent();
     } 
 }
 
