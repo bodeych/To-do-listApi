@@ -1,4 +1,5 @@
 using System.Data.Common;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
@@ -57,8 +58,8 @@ public class ToDoListController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<List<ToDoListResponseDto>>> AddToDoList()
     {
-        _service.CreateToDoList();
-        return Ok(_service);
+        var list = _service.CreateToDoList();
+        return Ok(list);
     }
     
     [HttpPost("{id}")]
@@ -68,12 +69,10 @@ public class ToDoListController : ControllerBase
         {
             Task = body.Task
         };
-        _service.AddItem(id, serviceDto);
-        var responseDto = new ToDoListResponseDto()
-        {
-            Task = serviceDto.Task
-        };
-        return Ok(_service);  //??
+        var list = _service.AddItem(id, serviceDto);
+        
+        
+        return Ok(list);  //??
     }
     
     [HttpDelete("{id}")]

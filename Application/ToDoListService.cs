@@ -27,8 +27,9 @@ public class ToDoListService
         var point = ToDoLists.Find((x => x.Id == id));
         return point;
     }
-    public void CreateToDoList() { 
+    public List<ToDoList> CreateToDoList() { 
         ToDoLists.Add(ToDoList.Create());
+        return ToDoLists;
     }
 
     public List<ToDoList>? AddItem(Guid id, ToDoListPointServiceDto body)
